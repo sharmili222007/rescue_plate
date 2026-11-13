@@ -1,0 +1,32 @@
+/* Additions for available-food.html only. Everything else comes from style.css. */
+
+/* Leave room under the fixed/sticky header */
+.af-page { padding-top: clamp(7rem, 12vw, 9rem); }
+
+.af-search { margin: 1.5rem 0 1rem; }
+
+/* Category filter buttons (they use your .button classes, this only spaces them) */
+.af-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; }
+
+.af-status, .af-empty { margin: 0 0 1.25rem; }
+
+/* Extra lines inside the existing food card */
+.af-card-extra { font-size: .9rem; opacity: .8; margin: .25rem 0 .75rem; }
+.af-card-actions { margin-top: .75rem; }
+.food-card .button-small { cursor: pointer; }
+
+/* View Details popup */
+.af-modal { max-width: 560px; max-height: 90vh; overflow-y: auto; text-align: left; }
+.af-detail-img { width: 100%; max-height: 240px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
+.af-detail-list { display: grid; grid-template-columns: max-content 1fr; gap: .5rem 1rem; margin: 1rem 0 0; }
+.af-detail-list dt { font-weight: 600; }
+.af-detail-list dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Mobile menu for this page (the homepage menu is handled by script.js) */
+@media (max-width: 900px) {
+  .nav-links.af-open { display: flex; }
+}
+@media (max-width: 560px) {
+  .af-detail-list { grid-template-columns: 1fr; }
+  .af-detail-list dd { margin-bottom: .5rem; }
+}
