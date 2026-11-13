@@ -1,0 +1,105 @@
+/* Rescue Plate theme. Load AFTER style.css (and after nothing else; it replaces donation-form.css). */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --rp-beet: #7A1F46;
+  --rp-beet-dark: #4E1130;
+  --rp-mango: #FFC145;
+  --rp-leaf: #2F8F5B;
+  --rp-paper: #FBF7F4;
+  --rp-ink: #2A1420;
+  --rp-line: rgba(42, 20, 32, .14);
+}
+
+body { background: var(--rp-paper); color: var(--rp-ink); font-family: "Hanken Grotesk", system-ui, sans-serif; line-height: 1.6; }
+body h1, body h2, body h3, body .brand { font-family: "Bricolage Grotesque", "Hanken Grotesk", sans-serif; letter-spacing: -.02em; color: var(--rp-ink); }
+body h1 { line-height: 1.05; font-weight: 800; }
+body h2 { line-height: 1.1; font-weight: 700; }
+
+/* The one bold move: marker-stroke highlight on emphasised words in headings */
+body h1 em, body h2 em {
+  font-style: normal;
+  color: inherit;
+  background: linear-gradient(transparent 58%, var(--rp-mango) 58% 92%, transparent 92%);
+  padding: 0 .12em;
+}
+
+/* Header */
+body .site-header { background: rgba(251, 247, 244, .92); border-bottom: 1px solid var(--rp-line); backdrop-filter: blur(8px); }
+body .brand, body .brand-light { color: var(--rp-beet); }
+body .brand-mark { color: var(--rp-mango); }
+body .nav-links a { color: var(--rp-ink); font-weight: 600; }
+body .nav-links a:hover, body .nav-links a.active { color: var(--rp-beet); }
+body .login-link { color: var(--rp-ink); }
+
+/* Buttons */
+body .button { background: var(--rp-beet); color: #fff; border: 2px solid var(--rp-beet); border-radius: 999px; font-weight: 700; transition: background .2s, color .2s, transform .2s; }
+body .button:hover { background: var(--rp-beet-dark); border-color: var(--rp-beet-dark); }
+body .button-outline { background: transparent; color: var(--rp-beet); }
+body .button-outline:hover { background: var(--rp-beet); color: #fff; }
+body .button-light { background: var(--rp-mango); border-color: var(--rp-mango); color: var(--rp-ink); }
+body .button-light:hover { background: #fff; border-color: #fff; color: var(--rp-ink); }
+body .text-link { color: var(--rp-beet); font-weight: 700; }
+body :focus-visible { outline: 3px solid var(--rp-mango); outline-offset: 2px; }
+
+/* Hero */
+body .eyebrow, body .section-kicker { color: var(--rp-beet); font-weight: 700; }
+body .eyebrow-dot { background: var(--rp-mango); }
+body .hero-description, body .hero-note { color: rgba(42, 20, 32, .78); }
+body .hero-image-main { border-radius: 28px; overflow: hidden; box-shadow: 0 24px 50px -24px rgba(78, 17, 48, .45); }
+body .hero-stamp { background: var(--rp-mango); color: var(--rp-ink); }
+body .floating-note, body .image-tag { background: #fff; color: var(--rp-ink); border-radius: 16px; }
+body .floating-icon { color: var(--rp-beet); }
+body .decor-one { background: var(--rp-mango); }
+body .decor-two { background: var(--rp-beet); opacity: .15; }
+
+/* Search and impact strip */
+body .search-section { background: #fff; border: 1px solid var(--rp-line); border-radius: 22px; }
+body .location-field input { background: var(--rp-paper); border: 1px solid var(--rp-line); border-radius: 999px; color: var(--rp-ink); }
+body .impact-strip { background: var(--rp-beet); color: #fff; }
+body .impact-strip strong { color: var(--rp-mango); }
+body .impact-strip em { color: var(--rp-mango); font-style: normal; }
+
+/* Food cards */
+body .food-card { background: #fff; border: 1px solid var(--rp-line); border-radius: 22px; overflow: hidden; box-shadow: none; transition: transform .2s, border-color .2s; }
+body .food-card:hover { transform: translateY(-4px); border-color: var(--rp-beet); }
+body .food-status { background: var(--rp-mango); color: var(--rp-ink); font-weight: 700; border-radius: 999px; }
+body .food-meta { color: var(--rp-beet); font-weight: 700; }
+body .food-dot { background: var(--rp-leaf); }
+body .demo-note { color: rgba(42, 20, 32, .65); }
+
+/* Banner, contact, footer */
+body .donate-banner { background: var(--rp-beet); color: #fff; border-radius: 32px; }
+body .donate-banner h2, body .donate-banner p { color: #fff; }
+body .donate-banner h2 em { color: var(--rp-ink); }
+body .light-kicker { color: var(--rp-mango); }
+body .banner-circle.circle-back { background: var(--rp-mango); }
+body .banner-circle.circle-front { background: var(--rp-beet-dark); }
+body .contact-form input, body .contact-form textarea { background: #fff; border: 1px solid var(--rp-line); border-radius: 12px; font: inherit; }
+body .footer { background: var(--rp-ink); color: rgba(255, 255, 255, .8); }
+body .footer .brand, body .footer .brand-light, body .footer a { color: #fff; }
+
+/* Intro and popups */
+body .intro { background: var(--rp-beet-dark); color: #fff; }
+body .intro-brand, body .intro-caption, body .intro-label { color: var(--rp-mango); }
+body .skip-intro { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; }
+body .modal { background: #fff; color: var(--rp-ink); border-radius: 24px; }
+body .modal input { border: 1px solid var(--rp-line); border-radius: 12px; font: inherit; }
+body .form-message { color: var(--rp-leaf); font-weight: 600; }
+
+/* Donation form */
+#donationForm { max-width: 900px; margin-top: 1.5rem; background: #fff; border: 1px solid var(--rp-line); border-radius: 24px; padding: clamp(1.25rem, 4vw, 2.5rem); }
+#donationForm h3 { margin: 2rem 0 1rem; padding-bottom: .6rem; border-bottom: 2px solid var(--rp-mango); color: var(--rp-beet); }
+#donationForm h3:first-child { margin-top: 0; }
+.donation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.form-group.full-width { grid-column: 1 / -1; }
+.form-group label { font-weight: 700; font-size: .92rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: .75rem .9rem; font: inherit; color: inherit; background: var(--rp-paper); border: 1px solid var(--rp-line); border-radius: 12px; box-sizing: border-box; }
+.form-group textarea { resize: vertical; }
+.form-group small { opacity: .7; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: 2px solid var(--rp-beet); outline-offset: 1px; background: #fff; }
+.form-group input:user-invalid, .form-group select:user-invalid, .form-group textarea:user-invalid { border-color: #C0392B; }
+.donation-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+#donationMessage { margin-top: 1rem; font-weight: 700; color: var(--rp-leaf); }
+@media (max-width: 700px) { .donation-grid { grid-template-columns: 1fr; } }

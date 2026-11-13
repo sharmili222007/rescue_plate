@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate Food | Rescue Plate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="available-food.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#home" aria-label="Rescue Plate home">
+      <span class="brand-mark">✳</span><span>Rescue<span class="brand-light">Plate</span></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#how-it-works">How It Works</a>
+      <a href="available-food.html">Available Food</a>
+      <a href="index.html#contact">Contact Us</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="login-link" href="index.html#login">Login</a>
+      <a class="button button-small" href="index.html#signup">Sign Up <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="donation-section section-wrap af-page" id="donate">
+      <div class="section-kicker">MAKE A DIFFERENCE <span>✳</span></div>
+      <div class="donation-heading">
+        <h2>Share food. <em>Spread kindness.</em></h2>
+        <p>Provide your surplus food details and help someone in need. Fields marked * are required.</p>
+      </div>
+
+      <form id="donationForm" enctype="multipart/form-data" novalidate>
+
+        <h3>Donor Information</h3>
+        <div class="donation-grid">
+          <div class="form-group">
+            <label for="donorName">Donor Name *</label>
+            <input type="text" id="donorName" name="donorName" required>
+          </div>
+          <div class="form-group">
+            <label for="organization">Restaurant / Organization</label>
+            <input type="text" id="organization" name="organization">
+          </div>
+          <div class="form-group">
+            <label for="donorPhone">Contact Number *</label>
+            <input type="tel" id="donorPhone" name="donorPhone" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required>
+          </div>
+          <div class="form-group">
+            <label for="donorEmail">Email Address *</label>
+            <input type="email" id="donorEmail" name="donorEmail" required>
+          </div>
+        </div>
+
+        <h3>Food Information</h3>
+        <div class="donation-grid">
+          <div class="form-group">
+            <label for="foodName">Food Name *</label>
+            <input type="text" id="foodName" name="foodName" required>
+          </div>
+          <div class="form-group">
+            <label for="foodCategory">Food Category *</label>
+            <select id="foodCategory" name="foodCategory" required>
+              <option value="">Select category</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Non-Vegetarian">Non-Vegetarian</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="foodQuantity">Quantity *</label>
+            <input type="text" id="foodQuantity" name="foodQuantity" placeholder="Example: 25 packs" required>
+          </div>
+          <div class="form-group">
+            <label for="servings">Number of People Served *</label>
+            <input type="number" id="servings" name="servings" min="1" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="foodDescription">Food Description *</label>
+            <textarea id="foodDescription" name="foodDescription" rows="3" required></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label for="foodImage">Upload Food Image *</label>
+            <input type="file" id="foodImage" name="foodImage" accept="image/jpeg,image/png,image/webp" required>
+            <small>Accepted formats: JPG, PNG and WEBP. Maximum size 5 MB.</small>
+            <img id="imagePreview" alt="Preview of the selected food image" hidden>
+          </div>
+        </div>
+
+        <h3>Food Safety Information</h3>
+        <div class="donation-grid">
+          <div class="form-group">
+            <label for="preparedAt">Preparation Date &amp; Time *</label>
+            <input type="datetime-local" id="preparedAt" name="preparedAt" required>
+          </div>
+          <div class="form-group">
+            <label for="expiryAt">Best Before / Expiry Date &amp; Time *</label>
+            <input type="datetime-local" id="expiryAt" name="expiryAt" required>
+          </div>
+          <div class="form-group">
+            <label for="foodStorage">Storage Conditions *</label>
+            <select id="foodStorage" name="foodStorage" required>
+              <option value="">Select storage condition</option>
+              <option value="Refrigerated">Refrigerated</option>
+              <option value="Room Temperature">Room Temperature</option>
+              <option value="Frozen">Frozen</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="foodType">Food Type *</label>
+            <select id="foodType" name="foodType" required>
+              <option value="">Select food type</option>
+              <option value="Freshly Prepared">Freshly Prepared</option>
+              <option value="Packaged">Packaged</option>
+            </select>
+          </div>
+        </div>
+
+        <h3>Pickup Information</h3>
+        <div class="donation-grid">
+          <div class="form-group full-width">
+            <label for="pickupAddress">Complete Pickup Address *</label>
+            <textarea id="pickupAddress" name="pickupAddress" rows="2" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="locality">Area / Locality *</label>
+            <input type="text" id="locality" name="locality" required>
+          </div>
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          <div class="form-group">
+            <label for="pincode">PIN Code *</label>
+            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" maxlength="6" required>
+          </div>
+          <div class="form-group">
+            <label for="pickupTime">Available Pickup Time *</label>
+            <input type="datetime-local" id="pickupTime" name="pickupTime" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="pickupInstructions">Additional Instructions</label>
+            <textarea id="pickupInstructions" name="pickupInstructions" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="donation-actions">
+          <button type="submit" class="button" id="submitBtn">Submit Donation ↗</button>
+          <a href="index.html" class="button button-outline">Cancel</a>
+        </div>
+
+        <p id="donationMessage" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html#home"><span class="brand-mark">✳</span><span>Rescue<span class="brand-light">Plate</span></span></a>
+    <p>Saving food. Sharing hope. Building stronger communities.</p>
+    <div class="footer-links"><a href="index.html#about">About</a><a href="index.html#how-it-works">How it works</a><a href="index.html#contact">Contact</a></div>
+    <small>© <span id="year"></span> Rescue Plate · Semester project concept</small>
+  </footer>
+
+  <script src="donate.js"></script>
+</body>
+</html>

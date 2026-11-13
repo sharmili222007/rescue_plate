@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Food | Rescue Plate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Your existing styles first, then the small additions for this page -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="available-food.css" />
+</head>
+<body>
+
+  <!-- Same header as index.html; links now point back to the home page sections -->
+  <header class="site-header">
+    <a class="brand" href="index.html#home" aria-label="Rescue Plate home">
+      <span class="brand-mark">✳</span><span>Rescue<span class="brand-light">Plate</span></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#how-it-works">How It Works</a>
+      <a class="active" href="available-food.html">Available Food</a>
+      <a href="index.html#contact">Contact Us</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="login-link" href="index.html#login">Login</a>
+      <a class="button button-small" href="index.html#signup">Sign Up <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="available section-wrap af-page" id="available-food">
+      <div class="section-kicker">FRESH OPPORTUNITIES <span>✳</span></div>
+      <div class="available-heading">
+        <div>
+          <h2>Food worth <em>rescuing.</em></h2>
+          <p>Browse food that donors have shared and find what is close to you.</p>
+        </div>
+        <a href="donate.html" class="text-link">Donate food <span>↗</span></a>
+      </div>
+
+      <!-- Search and category filters -->
+      <form class="search-form af-search" id="afSearchForm">
+        <label class="location-field"><span>⌖</span>
+          <input id="afSearch" type="search" placeholder="Search by food, area or city" aria-label="Search donations">
+        </label>
+        <button class="button search-button" type="submit">Search <span>→</span></button>
+      </form>
+      <div class="af-chips" id="afChips" role="group" aria-label="Filter by category"></div>
+
+      <p class="demo-note af-status" id="afStatus" role="status" aria-live="polite">Loading donations…</p>
+      <div class="food-grid" id="foodGrid"></div>
+      <p class="demo-note af-empty" id="afEmpty" hidden>No donations match your search. Try another area or choose All.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html#home"><span class="brand-mark">✳</span><span>Rescue<span class="brand-light">Plate</span></span></a>
+    <p>Saving food. Sharing hope. Building stronger communities.</p>
+    <div class="footer-links"><a href="index.html#about">About</a><a href="index.html#how-it-works">How it works</a><a href="index.html#contact">Contact</a></div>
+    <small>© <span id="year"></span> Rescue Plate · Semester project concept</small>
+  </footer>
+
+  <!-- View Details popup (reuses the existing modal look) -->
+  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden>
+    <div class="modal af-modal">
+      <button class="modal-close" id="detailClose" aria-label="Close dialog">×</button>
+      <img class="af-detail-img" id="detailImg" alt="" hidden>
+      <h2 id="detailTitle"></h2>
+      <p id="detailDesc"></p>
+      <dl class="af-detail-list" id="detailList"></dl>
+    </div>
+  </div>
+
+  <script src="available-food.js"></script>
+</body>
+</html>
