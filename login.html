@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login | Rescue Plate</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body class="auth-page">
+
+  <header class="auth-header">
+    <a href="index.html" class="auth-brand">
+      <span class="brand-mark">✳</span>
+      Rescue<span class="brand-light">Plate</span>
+    </a>
+
+    <a href="index.html" class="auth-home-link">
+      ← Back to Home
+    </a>
+  </header>
+
+  <main class="auth-layout">
+
+    <!-- LEFT SIDE -->
+    <section class="auth-story">
+
+      <div class="auth-story-content">
+
+        <span class="auth-eyebrow">
+          ✳ YOUR COMMUNITY IS WAITING
+        </span>
+
+        <h1>
+          Every meal<br>
+          shared makes<br>
+          a <em>difference.</em>
+        </h1>
+
+        <p>
+          Welcome back to Rescue Plate.
+          Continue connecting surplus food with the people
+          and communities who need it.
+        </p>
+
+        <div class="auth-story-image">
+          <img
+            src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+            alt="A colorful spread of fresh food"
+          >
+
+          <div class="auth-image-caption">
+            <span>✳</span>
+            <div>
+              <strong>Good food, not wasted.</strong>
+              <small>Make every plate count.</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="auth-story-footer">
+        LESS WASTE. MORE CARE. REAL IMPACT.
+      </div>
+
+    </section>
+
+    <!-- RIGHT SIDE -->
+    <section class="auth-form-section">
+
+      <div class="auth-card">
+
+        <div class="auth-kicker">WELCOME BACK <span>✳</span></div>
+
+        <h2>Good to see <em>you.</em></h2>
+
+        <p class="auth-description">
+          Log in to continue making a difference.
+        </p>
+
+        <form id="loginForm">
+
+          <div class="auth-field">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="auth-field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <button type="submit" class="button auth-submit">
+            Log In <span>↗</span>
+          </button>
+
+          <p id="loginMessage" class="auth-message" aria-live="polite"></p>
+
+        </form>
+
+        <div class="auth-divider">
+          <span></span>
+          <small>NEW TO RESCUE PLATE?</small>
+          <span></span>
+        </div>
+
+        <p class="auth-switch">
+          Don't have an account?
+          <a href="signup.html">Create one</a>
+        </p>
+
+        <p class="auth-terms">
+          Together, we can make sure good food finds
+          a better destination.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
