@@ -7,6 +7,17 @@ const db = require('./db').promise();
 
 const app = express();
 app.use(express.json());
+
+// ---------- Keep server files private ----------
+app.use((req, res, next) => {
+  const p = req.path.toLowerCase();
+  const blocked = ['/server.js', '/db.js', '/package.json', '/package-lock.json'];
+  if (blocked.includes(p) || p.startsWith('/node_modules') || p.startsWith('/database') || p.startsWith('/.git')) {
+    return res.status(404).send('Not found');
+  }
+  next();
+});
+
 app.use(express.static(__dirname));
 
 // ---------- Photo upload setup ----------
@@ -35,7 +46,7 @@ app.post('/api/signup', async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
     await db.execute(
       'INSERT INTO users (full_name, email, password_hash, role) VALUES (?, ?, ?, ?)',
-      [full_name, email, hash, role || 'donor']
+      [full_name, email, hash, role === 'receiver' ? 'receiver' : 'donor']
     );
     res.status(201).json({ message: 'Account created' });
   } catch (err) {
@@ -103,6 +114,8 @@ app.post('/api/donate', (req, res) => {
     }
   });
 });
+
+// ---------- List available donations ----------
 app.get('/api/donations', async (req, res) => {
   const q = (req.query.q || '').trim();
   try {
@@ -128,6 +141,8 @@ app.get('/api/donations', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// ---------- Claim a donation (receivers only) ----------
 app.post('/api/donations/:id/claim', async (req, res) => {
   const donationId = Number(req.params.id);
   const userId = Number(req.body.user_id);
@@ -160,4 +175,5 @@ app.post('/api/donations/:id/claim', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 app.listen(3000, () => console.log('Running on http://localhost:3000'));
