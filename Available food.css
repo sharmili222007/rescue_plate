@@ -30,3 +30,13 @@
   .af-detail-list { grid-template-columns: 1fr; }
   .af-detail-list dd { margin-bottom: .5rem; }
 }
+.claim-box {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rp-line);
+  font-size: 14px;
+}
+.claim-box p { margin: 0 0 12px; }
+.claim-box dl { margin: 12px 0 0; }
+.claim-box dt { font-weight: 700; margin-top: 8px; }
+.claim-box dd { margin: 2px 0 0; }

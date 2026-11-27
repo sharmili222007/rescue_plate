@@ -2,9 +2,8 @@
    It does not use script.js, so nothing on your homepage is affected. */
 
 /* ---- 1. Settings ------------------------------------------------------ */
-// Address of your Flask backend. Change it after you host Flask online,
-// for example "https://rescue-plate-api.onrender.com".
-const API_BASE = "http://127.0.0.1:5000";
+// Empty string = use the same server that served this page (Node on port 3000).
+const API_BASE = "";
 
 const CATEGORIES = ["All", "Vegetarian", "Non-Vegetarian", "Bakery", "Fruits", "Vegetables", "Others"];
 
@@ -45,30 +44,31 @@ function formatDate(value) {
   return value && !isNaN(d) ? d.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }) : "";
 }
 
+// The database stores only the file name; photos are served from /uploads.
 function imageUrl(path) {
   if (!path) return "";
-  return /^https?:\/\//.test(path) ? path : API_BASE + "/" + path.replace(/^\/+/, "");
+  return /^https?:\/\//.test(path) ? path : "/uploads/" + path;
 }
 
-// Convert one database record from the Flask API into the shape used by this page.
+// Convert one database record from the API into the shape used by this page.
 function fromApi(d) {
   return {
     demo: false,
-    id: d.donation_id,
+    id: d.id,
     name: d.food_name,
     category: d.food_category,
     emoji: EMOJI[d.food_category] || "🍽️",
     image: imageUrl(d.image_path),
     location: [d.locality, d.city].filter(Boolean).join(", "),
-    quantity: d.quantity,
+    quantity: d.food_quantity,
     servings: d.servings,
     expiry: d.expiry_at,
-    status: d.status || "Available",
+    status: "Available",
     description: d.food_description,
     prepared: d.prepared_at,
-    storage: d.storage_conditions,
+    storage: d.food_storage,
     foodType: d.food_type,
-    address: d.pickup_address,
+    address: "",
     pincode: d.pincode,
     pickup: d.pickup_time,
     notes: d.pickup_instructions
@@ -186,6 +186,8 @@ function openDetails(item) {
   list.replaceChildren();
   rows.forEach(([label, value]) => list.append(el("dt", "", label), el("dd", "", value)));
 
+  renderClaimBox(item);
+
   modal.hidden = false;
   document.getElementById("detailClose").focus();
 }
@@ -195,7 +197,69 @@ document.getElementById("detailClose").addEventListener("click", closeDetails);
 modal.addEventListener("click", e => { if (e.target === modal) closeDetails(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeDetails(); });
 
-/* ---- 8. Header menu and footer year ----------------------------------- */
+/* ---- 8. Claim box (receivers claim food) ------------------------------ */
+function renderClaimBox(item) {
+  const old = document.getElementById("claimBox");
+  if (old) old.remove();
+  if (item.demo) return;
+
+  let user = null;
+  try { user = JSON.parse(localStorage.getItem("user")); } catch (e) {}
+
+  const box = el("div", "claim-box");
+  box.id = "claimBox";
+  const msg = el("p", "");
+
+  if (!user) {
+    msg.textContent = "Log in with a receiver account to claim this food.";
+    const link = el("a", "button button-small", "Log in ↗");
+    link.href = "login.html";
+    box.append(msg, link);
+  } else if (user.role !== "receiver") {
+    msg.textContent = "Only receiver accounts (NGOs or individuals) can claim food.";
+    box.append(msg);
+  } else {
+    const btn = el("button", "button button-small", "Claim this food ↗");
+    btn.type = "button";
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      try {
+        const res = await fetch(API_BASE + "/api/donations/" + item.id + "/claim", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id: user.id })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          msg.textContent = data.error || "Something went wrong.";
+          btn.disabled = false;
+          return;
+        }
+        btn.remove();
+        msg.textContent = "Claimed! Please contact the donor to arrange pickup:";
+        const c = data.contact;
+        const dl = el("dl", "");
+        [
+          ["Donor", c.donor_name],
+          ["Organization", c.organization],
+          ["Phone", c.donor_phone],
+          ["Email", c.donor_email],
+          ["Pickup address", [c.pickup_address, c.locality, c.city, c.pincode].filter(Boolean).join(", ")]
+        ].filter(r => r[1]).forEach(([label, value]) => dl.append(el("dt", "", label), el("dd", "", value)));
+        box.append(dl);
+        loadDonations();
+      } catch (e) {
+        msg.textContent = "Could not reach the server.";
+        btn.disabled = false;
+      }
+    });
+    box.append(msg, btn);
+  }
+
+  document.getElementById("detailList").insertAdjacentElement("afterend", box);
+}
+
+/* ---- 9. Header menu and footer year ----------------------------------- */
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 menuToggle.addEventListener("click", () => {
@@ -204,6 +268,6 @@ menuToggle.addEventListener("click", () => {
 });
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* ---- 9. Start ---------------------------------------------------------- */
+/* ---- 10. Start --------------------------------------------------------- */
 renderChips();
 loadDonations();

@@ -13,7 +13,7 @@ form.addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
-
+  const role = document.getElementById('role').value;
   if (password !== confirmPassword) {
     showMessage('Passwords do not match.', true);
     return;
@@ -23,7 +23,7 @@ form.addEventListener('submit', async (e) => {
     const res = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ full_name, email, password }),
+            body: JSON.stringify({ full_name, email, password, role }),
     });
     const data = await res.json();
 

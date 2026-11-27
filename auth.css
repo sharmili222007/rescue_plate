@@ -469,3 +469,14 @@
     padding: 27px 21px;
   }
 }
+.auth-field select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--rp-line);
+  border-radius: 12px;
+  background: var(--rp-paper);
+  color: var(--rp-ink);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
